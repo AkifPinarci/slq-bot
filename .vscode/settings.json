@@ -1,0 +1,12 @@
+{
+    "sqltools.connections": [
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "name": "SQLBot",
+            "connectString": "postgresql://root:Password123%40pg@127.0.0.1:5432/sqlbot"
+        }
+    ]
+}

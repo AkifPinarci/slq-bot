@@ -1,0 +1,87 @@
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    platform: linux/arm64
+    container_name: sqlbot-db-dev
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: Password123@pg
+      POSTGRES_DB: sqlbot
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d sqlbot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - sqlbot-dev
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    platform: linux/arm64
+    container_name: sqlbot-backend-dev
+    volumes:
+      - ./backend:/opt/sqlbot/app
+      - ./data/excel:/opt/sqlbot/data/excel
+      - ./data/file:/opt/sqlbot/data/file
+      - ./data/images:/opt/sqlbot/images
+      - backend_venv:/opt/sqlbot/app/.venv
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+    environment:
+      POSTGRES_SERVER: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: sqlbot
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: Password123@pg
+      PROJECT_NAME: SQLBot
+      DEFAULT_PWD: SQLBot@123456
+      SECRET_KEY: dev-secret-key-change-in-production
+      BACKEND_CORS_ORIGINS: "http://localhost,http://localhost:5173,http://127.0.0.1:5173"
+      LOG_LEVEL: DEBUG
+      SQL_DEBUG: "false"
+      EMBEDDING_ENABLED: "false"
+      TABLE_EMBEDDING_ENABLED: "false"
+      BASE_DIR: /opt/sqlbot
+      MCP_IMAGE_PATH: /opt/sqlbot/images
+      EXCEL_PATH: /opt/sqlbot/data/excel
+      LOCAL_MODEL_PATH: /opt/sqlbot/models
+      OPENROUTER_API_KEY:
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - sqlbot-dev
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    platform: linux/arm64
+    container_name: sqlbot-frontend-dev
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+      - ./frontend/index.html:/app/index.html
+      - ./frontend/embedded.html:/app/embedded.html
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000/api/v1
+    networks:
+      - sqlbot-dev
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  backend_venv:
+
+networks:
+  sqlbot-dev:

@@ -1,0 +1,124 @@
+{
+  "i18n_default_workspace": "Varsayılan Çalışma Alanı",
+  "i18n_ds_name_exist": "Ad zaten mevcut",
+  "i18n_concat_admin": "Lütfen yönetici ile iletişime geçin!",
+  "i18n_exist": "{msg} zaten mevcut!",
+  "i18n_name": "Ad",
+  "i18n_not_exist": "{msg} mevcut değil!",
+  "i18n_error": "{key} hatası!",
+  "i18n_miss_args": "{key} parametresi eksik!",
+  "i18n_format_invalid": "{key} formatı yanlış!",
+  "i18n_login": {
+    "account_pwd_error": "Hesap veya şifre yanlış!",
+    "no_associated_ws": "İlişkili çalışma alanı yok, {msg}",
+    "user_disable": "Hesap devre dışı, {msg}",
+    "origin_error": "Geçersiz giriş yöntemi"
+  },
+  "i18n_user": {
+    "account": "Hesap",
+    "email": "E-posta",
+    "password": "Şifre",
+    "language_not_support": "Sistem [{key}] dilini desteklemiyor!",
+    "ws_miss": "Mevcut kullanıcı [{ws}] çalışma alanında değil!"
+  },
+  "i18n_ws": {
+    "title": "Çalışma Alanı"
+  },
+  "i18n_permission": {
+    "only_admin": "Sadece yöneticilerin çağırmasına izin verilir!",
+    "no_permission": "{url}{msg} çağırma izni yok",
+    "authenticate_invalid": "Kimlik doğrulama geçersiz【{msg}】",
+    "token_expired": "Token süresi doldu"
+  },
+  "i18n_llm": {
+    "validate_error": "Doğrulama başarısız [{msg}]",
+    "delete_default_error": "Varsayılan model [{key}] silinemiyor!",
+    "miss_default": "Varsayılan büyük dil modeli yapılandırılmamış"
+  },
+  "i18n_ds_invalid": "Veri kaynağı bağlantısı geçersiz",
+  "i18n_embedded": {
+    "invalid_origin": "Alan adı doğrulaması başarısız【{origin}】"
+  },
+  "i18n_terminology": {
+    "terminology_not_exists": "Bu terim mevcut değil",
+    "datasource_cannot_be_none": "Veri kaynağı boş olamaz",
+    "cannot_be_repeated": "Terim adı ve eş anlamlılar tekrar edemez",
+    "exists_in_db": "Terim adı ve eş anlamlılar zaten mevcut",
+    "term_name": "Terim Adı",
+    "term_description": "Terim Açıklaması",
+    "effective_data_sources": "Etkili Veri Kaynakları",
+    "all_data_sources": "Tüm Veri Kaynakları",
+    "synonyms": "Eş Anlamlılar",
+    "term_name_template": "Terim Adı (Zorunlu)",
+    "term_description_template": "Terim Açıklaması (Zorunlu)",
+    "effective_data_sources_template": "Etkili Veri Kaynakları (Çoklu desteklenir, \",\" ile ayrılır)",
+    "all_data_sources_template": "Tüm Veri Kaynakları (Y: Tüm veri kaynaklarına uygula, N: Belirtilen veri kaynaklarına uygula)",
+    "synonyms_template": "Eş Anlamlılar (Çoklu desteklenir, \",\" ile ayrılır)",
+    "term_name_template_example_1": "Terim1",
+    "term_description_template_example_1": "Terim1 Açıklaması",
+    "effective_data_sources_template_example_1": "VeriKaynağı1, VeriKaynağı2",
+    "synonyms_template_example_1": "EşAnlamlı1, EşAnlamlı2",
+    "term_name_template_example_2": "Terim2",
+    "term_description_template_example_2": "Terim2 Açıklaması",
+    "synonyms_template_example_2": "EşAnlamlı3",
+    "word_cannot_be_empty": "Terim boş olamaz",
+    "description_cannot_be_empty": "Terim açıklaması boş olamaz",
+    "datasource_not_found": "Veri kaynağı bulunamadı"
+  },
+  "i18n_data_training": {
+    "datasource_list_is_not_found": "Veri kaynağı listesi bulunamadı",
+    "datasource_id_not_found": "Veri kaynağı ID: {key} bulunamadı",
+    "datasource_cannot_be_none": "Veri kaynağı boş olamaz",
+    "datasource_assistant_cannot_be_none": "Veri kaynağı veya gelişmiş uygulama ikisi de boş olamaz",
+    "data_training_not_exists": "Bu örnek mevcut değil",
+    "exists_in_db": "Bu soru zaten mevcut",
+    "data_training": "SQL Örnek Kütüphanesi",
+    "problem_description": "Sorun Açıklaması",
+    "sample_sql": "Örnek SQL",
+    "effective_data_sources": "Etkili Veri Kaynakları",
+    "advanced_application": "Gelişmiş Uygulama",
+    "problem_description_template": "Sorun Açıklaması (Zorunlu)",
+    "sample_sql_template": "Örnek SQL (Zorunlu)",
+    "effective_data_sources_template": "Etkili Veri Kaynakları",
+    "advanced_application_template": "Gelişmiş Uygulama",
+    "problem_description_template_example": "TEST tablosundaki tüm ID'leri sorgula",
+    "effective_data_sources_template_example": "Etkili Veri Kaynağı 1",
+    "advanced_application_template_example": "Etkili Gelişmiş Uygulama Adı",
+    "error_info": "Hata Bilgisi",
+    "question_cannot_be_empty": "Soru boş olamaz",
+    "description_cannot_be_empty": "Örnek SQL boş olamaz",
+    "datasource_not_found": "Veri kaynağı bulunamadı",
+    "advanced_application_not_found": "Gelişmiş uygulama bulunamadı"
+  },
+  "i18n_custom_prompt": {
+    "exists_in_db": "Şablon adı zaten mevcut",
+    "not_exists": "Bu şablon mevcut değil",
+    "prompt_word_name": "İstem kelime adı",
+    "prompt_word_content": "İstem kelime içeriği",
+    "effective_data_sources": "Etkili Veri Kaynakları",
+    "all_data_sources": "Tüm Veri Kaynakları",
+    "prompt_word_name_template": "İstem Adı (Zorunlu)",
+    "prompt_word_content_template": "İstem İçeriği (Zorunlu)",
+    "effective_data_sources_template": "Etkili Veri Kaynakları (Çoklu desteklenir, \",\" ile ayrılır)",
+    "all_data_sources_template": "Tüm Veri Kaynakları (Y: Tüm veri kaynaklarına uygula, N: Belirtilen veri kaynaklarına uygula)",
+    "prompt_word_name_template_example1": "İstem1",
+    "prompt_word_content_template_example1": "İsteminizi detaylı açıklayın",
+    "effective_data_sources_template_example1": "VeriKaynağı1, VeriKaynağı2",
+    "prompt_word_name_template_example2": "İstem2",
+    "prompt_word_content_template_example2": "İsteminizi detaylı açıklayın",
+    "name_cannot_be_empty": "Ad boş olamaz",
+    "prompt_cannot_be_empty": "İstem içeriği boş olamaz",
+    "type_cannot_be_empty": "Tür boş olamaz",
+    "datasource_not_found": "Veri kaynağı bulunamadı",
+    "datasource_cannot_be_none": "Veri kaynağı boş olamaz"
+  },
+  "i18n_excel_export": {
+    "data_is_empty": "Form verisi boş, veri dışa aktarılamıyor"
+  },
+  "i18n_excel_import": {
+    "col_num_not_match": "Excel'deki sütun sayısı eşleşmiyor"
+  },
+  "i18n_authentication": {
+    "record_not_exist": "{msg} kaydı mevcut değil. Lütfen önce kaydedin!"
+  }
+}

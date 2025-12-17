@@ -1,0 +1,42 @@
+# Development Dockerfile for SQLBot Backend
+FROM python:3.11-slim-bookworm
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install uv for fast package management
+COPY --from=ghcr.io/astral-sh/uv:0.7.8 /uv /uvx /bin/
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV SQLBOT_HOME=/opt/sqlbot
+ENV APP_HOME=${SQLBOT_HOME}/app
+ENV PYTHONPATH=${APP_HOME}
+ENV PATH="${APP_HOME}/.venv/bin:$PATH"
+ENV UV_COMPILE_BYTECODE=1
+ENV UV_LINK_MODE=copy
+
+# Create directories
+RUN mkdir -p ${APP_HOME} ${SQLBOT_HOME}/data/excel ${SQLBOT_HOME}/data/file ${SQLBOT_HOME}/images ${SQLBOT_HOME}/models
+
+WORKDIR ${APP_HOME}
+
+# Copy dependency files first for caching
+COPY backend/pyproject.toml backend/uv.lock* ./
+
+# Install dependencies (creates .venv in current dir)
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --extra cpu || uv sync
+
+# Copy application code (this will be overridden by volume mount in dev)
+COPY backend/ ./
+
+# Expose ports
+EXPOSE 8000 8001
+
+# Start with hot-reload
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port 8000 --reload & uvicorn main:mcp_app --host 0.0.0.0 --port 8001 --reload && wait"]
