@@ -12,7 +12,7 @@ const elementTrLocale = elementEnLocale  // Using English locale for Element Plu
 const { wsCache } = useCache()
 
 const getDefaultLocale = () => {
-  return wsCache.get('user.language') || 'tr-TR'
+  return 'tr-TR'
 }
 
 const messages = {

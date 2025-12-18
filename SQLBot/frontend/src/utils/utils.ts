@@ -43,7 +43,7 @@ export function getDate(time?: Date | string | number) {
 export const getBrowserLocale = () => {
   const language = navigator.language
   if (!language) {
-    return 'zh-CN'
+    return 'tr-TR'
   }
   if (language.startsWith('en')) {
     return 'en'
@@ -52,10 +52,16 @@ export const getBrowserLocale = () => {
     const temp = language.toLowerCase().replace('_', '-')
     return temp === 'zh' ? 'zh-CN' : temp === 'zh-cn' ? 'zh-CN' : 'tw'
   }
-  return language
+  if (language.toLowerCase().startsWith('tr')) {
+    return 'tr-TR'
+  }
+  if (language.toLowerCase().startsWith('ko')) {
+    return 'ko-KR'
+  }
+  return 'tr-TR'  // Default to Turkish
 }
 export const getLocale = () => {
-  return wsCache.get('user.language') || getBrowserLocale() || 'zh-CN'
+  return 'tr-TR'
 }
 
 export const setSize = (size: any) => {
