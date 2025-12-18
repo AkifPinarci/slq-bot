@@ -147,40 +147,40 @@ async def get_default_config() -> LLMConfig:
     from common.core.config import settings
     
     # Always use the hardcoded OpenRouter model
-    # return LLMConfig(
-    #     model_id=None,
-    #     model_type="openai",  # OpenRouter uses OpenAI-compatible API
-    #     model_name=settings.OPENROUTER_MODEL_NAME,
-    #     api_key=settings.OPENROUTER_API_KEY,
-    #     api_base_url=settings.OPENROUTER_API_URL,
-    #     additional_params={},
-    # )
-    with Session(engine) as session:
-        db_model = session.exec(
-            select(AiModelDetail).where(AiModelDetail.default_model == True)
-        ).first()
-        if not db_model:
-            raise Exception("The system default model has not been set")
+    return LLMConfig(
+        model_id=None,
+        model_type="openai",  # OpenRouter uses OpenAI-compatible API
+        model_name=settings.OPENROUTER_MODEL_NAME,
+        api_key=settings.OPENROUTER_API_KEY,
+        api_base_url=settings.OPENROUTER_API_URL,
+        additional_params={},
+    )
+    # with Session(engine) as session:
+    #     db_model = session.exec(
+    #         select(AiModelDetail).where(AiModelDetail.default_model == True)
+    #     ).first()
+    #     if not db_model:
+    #         raise Exception("The system default model has not been set")
 
-        additional_params = {}
-        if db_model.config:
-            try:
-                config_raw = json.loads(db_model.config)
-                additional_params = {item["key"]: prepare_model_arg(item.get('val')) for item in config_raw if "key" in item and "val" in item}
-            except Exception:
-                pass
-        if not db_model.api_domain.startswith("http"):
-            db_model.api_domain = await sqlbot_decrypt(db_model.api_domain)
-            if db_model.api_key:
-                db_model.api_key = await sqlbot_decrypt(db_model.api_key)
+    #     additional_params = {}
+    #     if db_model.config:
+    #         try:
+    #             config_raw = json.loads(db_model.config)
+    #             additional_params = {item["key"]: prepare_model_arg(item.get('val')) for item in config_raw if "key" in item and "val" in item}
+    #         except Exception:
+    #             pass
+    #     if not db_model.api_domain.startswith("http"):
+    #         db_model.api_domain = await sqlbot_decrypt(db_model.api_domain)
+    #         if db_model.api_key:
+    #             db_model.api_key = await sqlbot_decrypt(db_model.api_key)
             
 
-        # 构造 LLMConfig
-        return LLMConfig(
-            model_id=db_model.id,
-            model_type="openai" if db_model.protocol == 1 else "vllm",
-            model_name=db_model.base_model,
-            api_key=db_model.api_key,
-            api_base_url=db_model.api_domain,
-            additional_params=additional_params,
-        )
+    #     # 构造 LLMConfig
+    #     return LLMConfig(
+    #         model_id=db_model.id,
+    #         model_type="openai" if db_model.protocol == 1 else "vllm",
+    #         model_name=db_model.base_model,
+    #         api_key=db_model.api_key,
+    #         api_base_url=db_model.api_domain,
+    #         additional_params=additional_params,
+    #     )
