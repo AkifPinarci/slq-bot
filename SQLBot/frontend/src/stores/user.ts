@@ -174,7 +174,7 @@ export const UserStore = defineStore('user', {
       }
       wsCache.set('user.language', language)
       this.language = language
-      i18n.global.locale.value = language
+      i18n.global.locale.value = language as 'tr-TR' | 'en' | 'zh-CN' | 'ko-KR'
       /* const { locale } = useI18n()
       locale.value = language */
       // locale.setLang(language)

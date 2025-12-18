@@ -5,11 +5,9 @@ import koKR from './ko-KR.json'
 import trTR from './tr-TR.json'
 import elementEnLocale from 'element-plus-secondary/es/locale/lang/en'
 import elementZhLocale from 'element-plus-secondary/es/locale/lang/zh-cn'
-import { useCache } from '@/utils/useCache'
 
 const elementKoLocale = elementEnLocale
 const elementTrLocale = elementEnLocale  // Using English locale for Element Plus as Turkish is not available
-const { wsCache } = useCache()
 
 const getDefaultLocale = () => {
   return 'tr-TR'
